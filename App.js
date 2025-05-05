@@ -2,12 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function HomeScreen() {
   return  (
-    <View style={styles.container}>
-      <Text style= {styles.title}>Main Screen</Text>
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Text style= {styles.title}>Main Screen</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 
@@ -59,9 +62,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: 'black',
-    fontSize: 15,
+    margin: 10,
+    fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   
 });
