@@ -1,13 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  return  (
+    <View style={styles.container}>
+      <Text style= {styles.title}>Main Screen</Text>
+    </View>
+  )
+}
+
+function Settings() {
+  return  (
+    <View style={styles.container}>
+      <Text style= {styles.title}>Settings</Text>
+    </View>
+  )
+   
+}
+
+function PinEditor() {
+  return  (
+    <View style={styles.container}>
+      <Text style= {styles.title}>Here's where the pins go!</Text>
+    </View>
+  )
+
+}
+
+function Backpack() {
+  return  (
+    <View style={styles.container}>
+      <Text style= {styles.title}>This is your precious backpack</Text>
+    </View>
+  )
+}
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Homepage" component={HomeScreen} options={{title: "Home"}}/>
+        <Tab.Screen name="Idk yet" component={PinEditor} options={{title: "PinEditor"}}/>
+        <Tab.Screen name="Idk yet_V2" component={Backpack} options={{title: "Backpack"}}/>
+        <Tab.Screen name="Settings" component={Settings} options={{title: "Settings"}}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +58,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  
 });
+  
