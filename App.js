@@ -39,7 +39,6 @@ function Backpack() {
     </View>
   )
 }
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
@@ -69,4 +68,3 @@ const styles = StyleSheet.create({
   },
   
 });
-  
