@@ -1,8 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View, Image, Modal } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
+
+const pinImg = require("./assets/Images/PinImage.png");
 
 function HomeScreen() {
   return  (
@@ -39,17 +42,61 @@ function Backpack() {
 //    </NavigationContainer>
 
 export default function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false); 
+  
+  const pinPressed = () => {
+    console.log("Pin pressed");
+    setIsModalVisible(true);
+  };
+  const closeModalPin = () => {
+    console.log("Pin Modal CLOSED!");
+    setIsModalVisible(false);
+  }
+  
   return (
     <View style={[styles.container]}>
-      <View style={[styles.greenBox, styles.boxShadow]}>
-        <Text style={[styles.normalText]}>Welcome to <Text style={[styles.boldText]}>Pinable!</Text></Text>
-    </View>
+      
+      <Pressable onPress={pinPressed}>
+        <Image source={pinImg} style={{ 
+          borderRadius: 150, 
+          borderColor: "black", 
+          borderWidth: 3, 
+          shadowColor: "purple", 
+          shadowOffset: {
+            height:20, 
+            width:10
+          }, 
+          shadowOpacity: .6, 
+          shadowRadius: 50, 
+          height:220, 
+          width: 220}}
+          />
+      </Pressable>
+      <Modal
+        style={[styles.Box, styles.boxShadow]}
+        visible={isModalVisible}
+        animationType='slide'
+        presentationStyle='pageSheet'>
+        <Pressable onPress={closeModalPin}>
+          <View style={[styles.pinUpload, styles.boxShadow, { alignSelf: "center", marginTop: 20}]}>
+            <Text style={[styles.boldText, {fontSize: 20}]}>
+              This is where you'll make your Pins!!
+            </Text>
+          </View>
+        </Pressable>
+      </Modal>
+      <View style={[styles.Box, styles.boxShadow]}>
+        <Text style={[styles.normalText]}>
+          Welcome to 
+          <Text style={[styles.boldText]}>Pinable!</Text>
+          </Text>
+      </View>
       <View style={[styles.uploadPinBox, styles.boxShadow]}>
-      <Text style={[styles.boldText]}>
+        <Text style={[styles.boldText]}>
           Here you can customize your own Pin!💥
         </Text>
-        </View>
       </View>
+   </View>
   )
 }
 
@@ -60,44 +107,61 @@ const styles = StyleSheet.create({
     paddingVertical: 45,
     paddingHorizontal: 10,
   },
+
+
   boldText: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: "center",
   },
+  
   normalText: {
     fontSize: 18,
     textAlign: "center",
   },
-  greenBox: {
+ 
+ 
+  Box: {
     flexDirection: 'row',
-    width: 100,
-    height: 150,
+    width: 200,
+    height: 60,
     borderWidth: 2,
     borderColor: "#FAF9F6",
     padding: 15, //nice placement
     borderRadius: 15,
     margin: 5,
   },  
+ 
   uploadPinBox: {
-    width: 215,
-    height: 40,
+    width: 380,
+    height: 60,
     padding: 10,
     borderRadius: 12,    
     margin: 5,
     borderWidth: 2,
     borderColor: "#FAF9F6",
   },
+ 
+ 
   boxShadow: {
     shadowColor: "FAF9F6 ",
     shadowOffset: {
-      width: 6,
-      height: 5
+      width: 0,
+      height: 0
     },
-    shadowOpacity: .7,
-    shadowRadius: 5
-  }
-
+    shadowOpacity: .5,
+    shadowRadius: 3
+  },
+  pinUpload: {
+    width: 280,
+    height: 60,
+    padding: 20,
+    alignItems: "center",
+    borderRadius: 12,    
+    margin: 5,
+    borderWidth: 2,
+    borderColor: "#FAF9F6",
+  },
 });
 
   
