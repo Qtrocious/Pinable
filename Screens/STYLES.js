@@ -31,7 +31,13 @@ const styles = StyleSheet.create({
     paddingVertical: 5, 
     fontWeight: "bold"
   },
-
+  menuImage: {
+    height: 150, 
+    width:150, 
+    position: 'absolute', 
+    marginBottom: 200
+  },
+  
 })
 
 //Hex codes: #293774, #9051A2, #FA5D66, #FFA1C5, #FDFEEC
