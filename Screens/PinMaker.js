@@ -1,5 +1,11 @@
-import React from 'react';
-import { Button, Pressable, Text, TouchableOpacity, View, Image, Modal } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { View } from "react-native-web";
+
+export default function PinMaker() {
+    return (
+        <View>
+            <Text>Welcome to making your first pin!</Text>
+            <Text>Click the button below to get started!</Text>
+            <Button title="Get Started" onPress={() => navigation.navigate('PinMaker')}/>
+        </View>
+    )
+}
