@@ -23,16 +23,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5, 
     shadowRadius: 5,
   },
-    menuStarted: {
-    backgroundColor: '#293774',
-    padding: 50,
-    marginTop: 20,
-    borderRadius: 100,
-    borderWidth: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1, 
-    shadowRadius: 5,
+  menuStarted: {
+  backgroundColor: '#293774',
+  padding: 20,
+  marginTop: 70,
+  borderRadius:50,
+  borderWidth: 2,
+  borderColor: '#4058c0',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 5 },
+  shadowOpacity: 1, 
+  shadowRadius: 5,
   },
   menuSlogan: {
     fontSize: 9.5, 
@@ -61,6 +62,6 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
 })
-
+//:#4058c0
 //Hex codes: #293774, #9051A2, #FA5D66, #FFA1C5, #FDFEEC
 export default styles;

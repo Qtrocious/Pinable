@@ -1,8 +1,13 @@
 import { Pressable, Text, View, Image, Button } from 'react-native';
+import { TabActions } from '@react-navigation/native';
+
 import styles from './STYLES.js';
+
 const PinImage = require('../assets/Images/PinIcon.png')
 
-export default function Welcome() {
+
+
+export default function Welcome({navigation}) {
   return (
     <View style={[styles.menuWelcome]}>
 
@@ -23,8 +28,12 @@ export default function Welcome() {
       </Text>
 
       <Pressable 
+        onPress={() => {navigation.dispatch(TabActions.jumpTo('PinMaker'))}}
         style={[styles.menuStarted]} 
       >
+        <Text style={[styles.menuText]}>
+          Get Started
+        </Text>
       </Pressable>
     </View>
   )
