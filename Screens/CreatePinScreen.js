@@ -1,15 +1,37 @@
 import { useState } from 'react';
 import { View, Text, Button, Image, TextInput, Alert, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const [image, setImage] = useState(null); 
+const [title, setTitle] = useState('');   
+
+const savePin = async () => {
+        try {
+            const savedPins = await AsyncStorage.getItem('PinCreated'); // Take back the PinCreated from local storage
+
+            const parsedPins = JSON.parse(savedPins) ; // encrypt the PinCreated
+            parsedPins.push({ savePin }); // add the new pin to the list of pins
+            await AsyncStorage.setItem('PinCreated', JSON.stringify(parsedPins)); // Save the new pin to local storage
+
+
+
+
+        }    catch (error) {
+            console.error('Error saving pin:', error);
+            }
+    }
+const [pinCreated, setPinCreated] = useState (null); // State to store the pin created
+
+await AsyncStorage.setItem('user', JSON.stringify({ result: 'PinCreated'})); // Save the PinCreated on local storage
+
 
 
 export default function CreatePinScreen() {
-    
-    const [image, setImage] = useState(null); 
-    const [title, setTitle] = useState('');   
 
     const pickImage = async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
         
         if (status !== 'granted') {
             Alert.alert('Sorry, a great pin needs a great image!');
