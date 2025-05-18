@@ -7,17 +7,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //use state only stores data WHILE running the app, not locally only online typa thing
 //useState => '' is to store strings, 0 to store numbers, false to store booleans, name:'', 
 //age: 0 to store user profiles, [] to storer images, lists, null to detect when something is selecter yet    
-const [pinImage, setPinImage] = useState([]);
-const [pinTitle, setPinTitle] = useState('');
-const [pinSize, setPinSize] = useState(null);   
+const [pins, setPins] = useState([]); //why []? cuz i want to store many pins made by the users!
 const [pinPixelated, setPinPixelated] = useState(null);   
+const [pinSize, setPinSize] = useStateForPath;te(null);
 
+const createPin = (imageUri, title) => {
+    const newPin = {                        //This makes up data stuff so it stays even when offline
+        id: Date.now().toString(), //foun this is a great way to make a unique id
+        imageUri, //this is the path file from where the user upload the photo from
+        title, //text user typed
+        createdAt: new Date().toISOString(), 
+    };
 
+    const createdPins = [newPin, ...pins]; //This adds newly created pins to the top of the list, so later you dont have to scroll down
+    
+    setPins(createdPins) // this updates the state, so, the memory
+    
+    //but, without the below, this data gets lost without saving it, so, we're saving it
+    AsyncStorage.setItem('pins', JSON.stringify(createdPins)); // Save the PinCreated on local storage
+}
 
-
-
-
-await AsyncStorage.setItem('user', JSON.stringify({ result: 'PinCreated'})); // Save the PinCreated on local storage
 
 
 
@@ -27,21 +36,21 @@ export default function CreatePinScreen() {
 
 
         
-    //    if (status !== 'granted') {
-    //        Alert.alert('Sorry, a great pin needs a great image!');
-    //        return;
-    //    }
-    //    const result = await ImagePicker.launchImageLibraryAsync({
-    //        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //        allowsEditing: true,
-    //        aspect: [4, 3],
-    //        quality: 1,
-    //    });
-    //    if (!result.canceled) {
-    //        setImage(result.assets[0].uri); // store the selected image
-    //    }
-    //}
+        if (status !== 'granted') {
+            Alert.alert('Sorry, a great pin needs a great image!');
+            return;
+        }
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if (!result.canceled) {
+            setImage(result.assets[0].uri); // store the selected image
+        }
     }
+    
 
     return (
         <View   
