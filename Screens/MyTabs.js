@@ -5,14 +5,16 @@ import PinMaker from './PinMaker.js';
 import Backpack from './Backpack.js';
 import Welcome from './Welcome.js';
 import CreatePinScreen from './CreatePinScreen.js';
+import InventoryPin from './InventoryPin.js';
 
 const Tab = createBottomTabNavigator();
 
 //This is the main tab navigator for the app
 export default function MyTabs() {
     return (
-        <Tab.Navigator initialRouteName='Welcome' options={{
-                headerShown: false,}}>
+        <Tab.Navigator initialRouteName='Welcome' 
+                options={{
+                    headerShown: false,}}>
             
             <Tab.Screen name="Welcome" component={Welcome} 
                 options={{ 
@@ -35,6 +37,9 @@ export default function MyTabs() {
             <Tab.Screen name="Backpack" component={Backpack}
                 options={{
                     headerShown: false,}}/>
+            <Tab.Screen name="InventoryPin" component={InventoryPin}
+                options={{
+                    headerShown: false}}/>
         </Tab.Navigator>
     );
 }

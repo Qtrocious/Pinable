@@ -26,13 +26,11 @@ export default function MainApp() {
                         height: 2,
                     },
                     shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                }}>
+                    shadowRadius: 3.84,}}>
                     <Text style={{
                         fontSize: 12,
                         fontWeight: 'bold',
-                        textAlign: 'center',
-                    }}>
+                        textAlign: 'center',}}>
                         Welcome! 
                         This is the main app screen.
                         You can navigate to different sections of the app using the bottom tab navigator.
@@ -44,8 +42,7 @@ export default function MainApp() {
                     borderWidth:3,
                     borderColor: '#0D7EEC',
                     backgroundColor: '#FDFEEC',
-                    padding: 10
-                }}>
+                    padding: 10,}}>
                     <Text>
                         This is where you
                     </Text>

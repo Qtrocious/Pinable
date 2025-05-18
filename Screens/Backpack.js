@@ -7,8 +7,7 @@ export default function Backpack() {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>Welcome to your Backpack</Text>
             <Text>Select a pin to pin your 
-            <Text style={{fontWeight:"bold"}}>Backpack</Text>                
-            !</Text>
+            <Text style={{fontWeight:"bold"}}>Backpack</Text>!</Text>
         </View>
     )
 }
