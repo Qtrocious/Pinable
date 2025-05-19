@@ -13,7 +13,7 @@ import styles from './STYLES';
 
 
 
-export default function CreatePinScreen() {
+export default function CreateCustomPin() {
     
     const [pins, setPins] = useState([]); //why []? cuz i want to store many pins made by the users!
     const [titlePin, setTitlePin] = useState('');
@@ -108,7 +108,8 @@ export default function CreatePinScreen() {
                 style={{
                     width: 150,
                     height: 150, 
-                    marginTop: 20
+                    marginTop: 20,
+                    borderRadius: 150, 
                 }}/>
             )}
             

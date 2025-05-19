@@ -2,7 +2,6 @@ import { View, Text, FlatList,  Button, Image, TextInput, Alert, Pressable } fro
 import styles from './STYLES.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { load } from 'react-native-track-player/lib/src/trackPlayer.js';
 
 export default function InventoryPin() {
     const [pins, setPins] = useState([]);
