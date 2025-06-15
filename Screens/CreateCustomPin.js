@@ -24,12 +24,13 @@ export default function CreateCustomPin() {
             id: Date.now().toString(), //foun this is a great way to make a unique id
             imageUri, //this is the path file from where the user upload the photo from
             title, //text user typed
-            createdAt: new Date().toISOString(),
+            x: 0,
+            y: 0,
         };
         
-        const createdPins = [newPin, ...pins]; //This adds newly created pins to the top of the list, so later you dont have to scroll down
+        const createdPins = [newPin, ...pins]; // adds newly created pins to the top of the list, so later you dont have to scroll down
         
-        setPins(createdPins) // this updates the state, so, the memory
+        setPins(createdPins) // updates the state, so, the memory
         
         //but, without the below, this data gets lost without saving it, so, we're saving it
         AsyncStorage.setItem('pins', JSON.stringify(createdPins)); // sets the data under the key 'pins', stringify converts objeect into a string, cuz asyncstorage can only store strings  
