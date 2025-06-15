@@ -1,8 +1,8 @@
-import { View, Text,Image,  } from 'react-native';
+import { View, Text,Image, TouchableHighlight, TouchableOpacity,  } from 'react-native';
 import styles from './STYLES.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { GestureDetector, Gesture, GestureHandlerRootView, FlatList  } from 'react-native-gesture-handler';
+import { GestureDetector, Gesture, GestureHandlerRootView, FlatList, Pressable  } from 'react-native-gesture-handler';
 import Animated, {useSharedValue, useAnimatedStyle, withSpring, withDelay, runOnJS} from 'react-native-reanimated';
 
 function DraggablePin({item, newPinPosition}) {
@@ -51,17 +51,31 @@ function DraggablePin({item, newPinPosition}) {
 // Main component for InventoryPin screen
 export default function InventoryPin() {
     const [pins, setPins] = useState([]);
-
+    const [activePins, setActivePins] = useState([]); 
+    const handleActivePin = (pin) => {
+        if (!activePins.some(p => p.id === pin.id)) {
+          const newPin = {
+            ...pin,
+            x: 100, // Default starting X (you can customize)
+            y: 100, // Default starting Y
+          };
+          setActivePins([...activePins, newPin]);
+        }
+      };
     const newPinPosition = async (id, x, y) => {
-        const updatedPins = pins.map(pin => {
-            if (pin.id === id) {
-                return {...pin, x, y}; // Updates the pin's position
-            }
-            return pin;
-        });
+        const updatedPins = pins.map(pin => 
+            pin.id === id ? { ...pin, x, y } : pin 
+        );
+
+        const updatedActivePins = activePins.map(pin => 
+            pin.id === id ? { ...pin, x, y } : pin 
+        );
+        
         setPins(updatedPins);
+        setActivePins(updatedActivePins);  
         await AsyncStorage.setItem('pins', JSON.stringify(updatedPins)); // Saves updated pins to AsyncStorage
     };
+
 
     useEffect(() => {
         const loadPins = async () => {
@@ -77,30 +91,63 @@ export default function InventoryPin() {
         };
         loadPins();
     }, []);
-    
     return (    
-        // Main view for the InventoryPin screen
-        <GestureHandlerRootView style={{flex: 1, backgroundColor: '#0D7EEC'}}> 
-            {pins.map((item) => (
-                <DraggablePin key={item.id} item={item} onDrop={handleDrop} />
-            ))}
-                    
-            <View // View for backpack placeholder 
+    // Main view for the InventoryPin screen
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: '#0D7EEC' }}>
+        <View // Backpack bro
+          style={{
+            backgroundColor: '#0D7EEC',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 0.6,
+          }}
+        >
+          <Text style={{ fontSize: 24 }}>Your Backpack</Text>
+        </View>
+      <FlatList //inventory preview
+        contentContainerStyle={{ padding: 10 }}
+          style={{ 
+            margin: 5,
+            padding: 10,
+            borderWidth: 1.5,
+            borderTopEndRadius: 20,
+            borderBottomEndRadius: 20,
+            borderBottomStartRadius: 20,
+            backgroundColor: 'white',
+          }}
+        numColumns={3}
+        data={pins}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+
+          <View style={{ padding: 5 }}>
+
+            <TouchableOpacity onPress={() => handleActivePin(item)}> 
+
+              <Image
+                source={{ uri: item.imageUri }}
                 style={{
-                    backgroundColor: '#0D7EEC',
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flex:0.6,
-                }}>     
-                    <Text
-                        style={{
-                            fontSize: 24,}}>
-                                Your Backpack
-                    </Text>
-                </View>
+                  height: 70,
+                  width: 70,
+                  borderRadius: 100,
+                }}
+              />
 
-        </GestureHandlerRootView>
+            </TouchableOpacity>
 
+          </View>
+        )}
+      />
+
+      {activePins.map((item) => (
+        <DraggablePin
+          key={`draggable-${item.id}`}
+          item={item}
+          newPinPosition={newPinPosition}
+        />
+      ))}
+
+    </GestureHandlerRootView>
     )
 }
