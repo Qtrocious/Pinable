@@ -1,11 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MainApp from './MainApp.js';
-import PinMaker from './PinMaker.js';
 import Backpack from './Backpack.js';
 import Welcome from './Welcome.js';
-import CreatePinScreen from './CreatePinScreen.js';
 import InventoryPin from './InventoryPin.js';
+import CreateCustomPin from './CreateCustomPin.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,23 +22,18 @@ export default function MyTabs() {
             
             <Tab.Screen name="MainApp" component={MainApp} 
                 options={{
-                    headerShown: false,}}/>
+                    headerShown: true,}}/>
             
-            <Tab.Screen name="PinMaker" component={PinMaker} 
+            <Tab.Screen name="Create & Custom" component={CreateCustomPin}
                 options={{
-                    headerShown: false,
-                }}/>
-            
-            <Tab.Screen name="CreatePin" component={CreatePinScreen}
-                options={{
-                    headerShown: false}}/>
+                    headerShown: true}}/>
 
             <Tab.Screen name="Backpack" component={Backpack}
                 options={{
-                    headerShown: false,}}/>
-            <Tab.Screen name="InventoryPin" component={InventoryPin}
+                    headerShown: true,}}/>
+            <Tab.Screen name="Inventory" component={InventoryPin}
                 options={{
-                    headerShown: false}}/>
+                    headerShown: true}}/>
         </Tab.Navigator>
     );
 }

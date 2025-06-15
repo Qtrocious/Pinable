@@ -12,7 +12,6 @@ export default function MainApp() {
             flex: 1,
             }
         }>
-            <ScrollView>
                 <View style={{ 
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -47,7 +46,6 @@ export default function MainApp() {
                         This is where you
                     </Text>
                 </View>
-            </ScrollView>
         </View>
     );
     

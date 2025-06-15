@@ -28,7 +28,7 @@ export default function Welcome({navigation}) {
       </Text>
 
       <Pressable 
-        onPress={() => {navigation.dispatch(TabActions.jumpTo('PinMaker'))}}
+        onPress={() => {navigation.dispatch(TabActions.jumpTo('Create & Custom'))}}
         style={[styles.menuStarted]} 
       >
         <Text style={[styles.menuText]}>

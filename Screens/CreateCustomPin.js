@@ -12,7 +12,7 @@ import styles from './STYLES';
 //const [pinSize, setPinSize] = useState(null);
 
 
-
+    
 export default function CreateCustomPin() {
     
     const [pins, setPins] = useState([]); //why []? cuz i want to store many pins made by the users!
@@ -38,13 +38,13 @@ export default function CreateCustomPin() {
     const requestCameraPermission = async () => {
         const { status } = await ImagePicker.requestCameraPermissionsAsync();
         if (status !== 'granted') {
-            Alert.alert('Permission need vro 🥀');
+            Alert.alert('Permission needed vro 🥀');
             return false;
         }
         return true;
     }
     
-    // allows the user to open camera if they want to take camera  
+    // allows the user to open camera if they want to take camera V
     const takePhoto = async () => {
         const allowedTakePhoto = await requestCameraPermission();
         if (!allowedTakePhoto) return;
@@ -74,15 +74,15 @@ export default function CreateCustomPin() {
         <View   
             style={{ 
                 flex: 1, 
-                justifyContent: 'center', 
-                alignItems: 'center' 
+                justifyContent: 'flex-start', 
+                alignItems: 'stretch' 
                 }}>
 
             <Text 
                 style={{
                     fontSize: 24, 
                     fontWeight: 'bold', 
-                    marginBottom: 20, 
+                    margin: 20, 
                     textAlign: 'center', 
                 }}>
                 Create a Pin!
@@ -92,15 +92,49 @@ export default function CreateCustomPin() {
                 value={titlePin}
                 onChangeText={setTitlePin}
                 style = {{
+                    includeFontPadding: true,
+                    fontSize: 16,
+                    textAlign: 'center',
+                    backgroundColor: '#FDFEEC',
                     borderWidth: 2,
                     padding:10,
                     margin:10, 
-                    borderRadius: 30, 
+                    borderRadius: 12, 
                 }}/>
                 
-            <Button title='Take a memory' onPress={takePhoto}/>
+            <Pressable onPress={takePhoto}>
+                <Text style={{
+                    padding:10, 
+                    margin:10, 
+                    borderWidth: 2, 
+                    textAlign: 'center',
+                    borderColor: 'black', 
+                    borderRadius: 20, 
+                    shadowColor: 'black', 
+                    shadowOffset: {width:5, height:5}, 
+                    shadowRadius: 5, 
+                    shadowOpacity: .57,
+                }}>
+                    Take a memory
+                </Text>
+            </Pressable>
             
-            <Button title='Pick your memory' onPress={pickImage}/>
+            <Pressable onPress={pickImage}>
+                <Text style={{
+                    padding:10, 
+                    textAlign: 'center',
+                    margin:10, 
+                    borderWidth: 2, 
+                    borderColor: 'black', 
+                    borderRadius: 20, 
+                    shadowColor: 'black', 
+                    shadowOffset: {width:5, height:5}, 
+                    shadowRadius: 5, 
+                    shadowOpacity: .57,
+                }}>
+                    Pick your memory
+                </Text>
+            </Pressable>
             
             {imageUri && (
                 <Image 
@@ -109,12 +143,12 @@ export default function CreateCustomPin() {
                     width: 150,
                     height: 150, 
                     marginTop: 20,
-                    borderRadius: 150, 
+                    borderRadius: 100, 
                 }}/>
             )}
             
             <Pressable
-                onPress={() => {
+                onPress={() => { // trim is used to remove spaces from the string
                     if (!imageUri || !titlePin.trim()) {
                         Alert.alert('just put the image and the title vro🥀🥀');
                     return;
@@ -129,11 +163,12 @@ export default function CreateCustomPin() {
                 >
                     <Text style={{
                         padding:10, 
+                        textAlign: 'center',
                         margin:10, 
                         borderWidth: 2, 
                         borderColor: 'black', 
                         borderRadius: 20, 
-                        shadowColor: 'red', 
+                        shadowColor: 'black', 
                         shadowOffset: {width:5, height:5}, 
                         shadowRadius: 5, 
                         shadowOpacity: .57,
