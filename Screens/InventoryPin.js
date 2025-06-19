@@ -48,7 +48,7 @@ function DraggablePin({item, newPinPosition}) {
         )
     };
 
-// Main component for InventoryPin screen
+// main component for InventoryPin screen
 export default function InventoryPin() {
     const [pins, setPins] = useState([]);
     const [activePins, setActivePins] = useState([]); 
@@ -56,7 +56,7 @@ export default function InventoryPin() {
         if (!activePins.some(p => p.id === pin.id)) {
           const newPin = {
             ...pin,
-            x: 100, // Default starting X (you can customize)
+            x: 100, // Default starting X 
             y: 100, // Default starting Y
           };
           setActivePins([...activePins, newPin]);
